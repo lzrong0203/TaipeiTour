@@ -41,15 +41,18 @@ class TourDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            tourTitle.doOnTextChanged { text, _, _, _ ->
-                tour = tour.copy(title = text.toString())
+            tourTitle.apply {
+                text = tour.title
             }
 
             addedDate.apply {
-                text = addedDate.toString()
-                isEnabled = tour.isVisited
+                text = tour.addDate.toString()
+                isEnabled = !tour.isVisited
             }
 
+            tourVisited.apply {
+                isChecked = tour.isVisited
+            }
             tourVisited.setOnCheckedChangeListener { _, isChecked ->
                 tour = tour.copy(isVisited = isChecked)
             }
