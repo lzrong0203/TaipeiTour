@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TaipeiTour</string>
+    <string name="tour_title">A tour point</string>
+    <string name="tour_details_label_hint">The detail of the tour point</string>
+    <string name="added_date">7/12/2022</string>
+    <string name="visited_label">Visited</string>
+
+</resources>
