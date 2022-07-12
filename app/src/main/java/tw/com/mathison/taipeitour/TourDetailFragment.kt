@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import model.Tour
 import tw.com.mathison.taipeitour.databinding.ActivityTourDetailBinding
@@ -14,10 +15,12 @@ class TourDetailFragment: Fragment() {
 
     private lateinit var binding: ActivityTourDetailBinding
 
+    private lateinit var tour: Tour
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var tour = Tour(
+        tour = Tour(
            id = UUID.randomUUID(),
            title = "金融研訓院",
            addDate = Date(),
@@ -37,5 +40,19 @@ class TourDetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            tourTitle.doOnTextChanged { text, _, _, _ ->
+                tour = tour.copy(title = text.toString())
+            }
+
+            addedDate.apply {
+                text = addedDate.toString()
+                isEnabled = tour.isVisited
+            }
+
+            tourVisited.setOnCheckedChangeListener { _, isChecked ->
+                tour = tour.copy(isVisited = isChecked)
+            }
+        }
     }
 }
